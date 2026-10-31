@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDStudio | Creative Media & Production</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        studioDark: '#0b0b0d',
+                        studioCard: '#141418',
+                        studioBorder: '#26262e',
+                        studioOrange: '#ff6b00',
+                        studioOrangeHover: '#e05e00',
+                        studioGlow: 'rgba(255, 107, 0, 0.15)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0b0d;
+            color: #f3f4f6;
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 25px rgba(255, 107, 0, 0.25);
+            border-color: rgba(255, 107, 0, 0.5);
+        }
+        .text-glow {
+            text-shadow: 0 0 12px rgba(255, 107, 0, 0.4);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b0d;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #26262e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff6b00;
+        }
+    </style>
+</head>
+<body class="bg-studioDark text-gray-100 antialiased selection:bg-studioOrange selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-studioDark/80 backdrop-blur-md border-b border-studioBorder/60 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-studioOrange to-amber-600 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-studioOrange/20 group-hover:scale-105 transition-transform duration-300">
+                    GD
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl tracking-tight text-white group-hover:text-studioOrange transition-colors">GDStudio</span>
+                    <span class="text-[10px] tracking-widest text-gray-400 uppercase font-semibold">God's Daughter Studio</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#home" class="hover:text-studioOrange transition-colors">Home</a>
+                <a href="#services" class="hover:text-studioOrange transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-studioOrange transition-colors">Portfolio</a>
+                <a href="#calculator" class="hover:text-studioOrange transition-colors">Quote Estimator</a>
+                <a href="#about" class="hover:text-studioOrange transition-colors">About</a>
+                <a href="#contact" class="hover:text-studioOrange transition-colors">Contact</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="#contact" class="bg-studioOrange hover:bg-studioOrangeHover text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 shadow-lg shadow-studioOrange/20 hover:shadow-studioOrange/40 hover:-translate-y-0.5">
+                    Book a Session
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-studioCard border-b border-studioBorder px-6 py-6 space-y-4">
+            <a href="#home" class="mobile-link block text-base font-medium text-gray-200 hover:text-studioOrange">Home</a>
+            <a href="#services" class="mobile-link block text-base font-medium text-gray-200 hover:text-studioOrange">Services</a>
+            <a href="#portfolio" class="mobile-link block text-base font-medium text-gray-200 hover:text-studioOrange">Portfolio</a>
+            <a href="#calculator" class="mobile-link block text-base font-medium text-gray-200 hover:text-studioOrange">Quote Estimator</a>
+            <a href="#about" class="mobile-link block text-base font-medium text-gray-200 hover:text-studioOrange">About</a>
+            <a href="#contact" class="mobile-link block text-base font-medium text-gray-200 hover:text-studioOrange">Contact</a>
+            <div class="pt-4 border-t border-studioBorder">
+                <a href="#contact" class="mobile-link block w-full text-center bg-studioOrange text-white py-3 rounded-xl font-semibold">Book a Session</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center min-h-screen">
+        <!-- Background Ambient Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-studioOrange/10 blur-[140px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-[300px] h-[300px] bg-amber-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-studioCard border border-studioBorder text-xs font-medium text-studioOrange">
+                        <span class="w-2 h-2 rounded-full bg-studioOrange animate-pulse"></span>
+                        Full-Service Creative Agency & Studio
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1]">
+                        Creative Excellence in <span class="bg-gradient-to-r from-studioOrange via-amber-500 to-amber-300 bg-clip-text text-transparent">Media, Design & Production</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Transforming visions into iconic visuals and sound. We specialize in Graphic Design, Cinematic Videography, High-End Photography, and Audio Mastering.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-full bg-studioOrange hover:bg-studioOrangeHover text-white font-bold text-center transition-all shadow-lg shadow-studioOrange/25 hover:shadow-studioOrange/50 hover:-translate-y-0.5">
+                            Explore Our Work <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-full bg-studioCard border border-studioBorder hover:border-gray-500 text-gray-200 font-semibold text-center transition-all hover:bg-studioCard/80">
+                            Get Instant Quote
+                        </a>
+                    </div>
+
+                    <!-- Counter / Stats Grid -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-studioBorder/60 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">450+</div>
+                            <div class="text-xs sm:text-sm text-gray-400">Projects Delivered</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">99%</div>
+                            <div class="text-xs sm:text-sm text-gray-400">Client Satisfaction</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">10+</div>
+                            <div class="text-xs sm:text-sm text-gray-400">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Feature Reel / Visual Showcase Grid -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Card Stack Glow -->
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-studioOrange to-amber-600 opacity-20 blur-xl"></div>
+                        
+                        <div class="relative bg-studioCard border border-studioBorder rounded-3xl p-4 sm:p-6 space-y-4 shadow-2xl">
+                            <!-- Visual Item 1: Design Header Preview -->
+                            <div class="relative h-48 rounded-2xl overflow-hidden group">
+                                <img src="https://images.unsplash.com/photo-1542744094-3a31b272c490?auto=format&fit=crop&w=800&q=80" alt="Design Reel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                                    <div>
+                                        <span class="text-[10px] uppercase tracking-wider bg-studioOrange text-white font-bold px-2 py-0.5 rounded">Graphic Design</span>
+                                        <h3 class="text-white font-bold text-base mt-1">High-Impact Brand Graphics & Visuals</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <!-- Visual Item 2 -->
+                                <div class="relative h-36 rounded-2xl overflow-hidden group">
+                                    <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=600&q=80" alt="Videography" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+                                        <span class="text-xs font-semibold text-white"><i class="fa-solid fa-video text-studioOrange mr-1"></i> Video Shoot</span>
+                                    </div>
+                                </div>
+
+                                <!-- Visual Item 3 -->
+                                <div class="relative h-36 rounded-2xl overflow-hidden group">
+                                    <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80" alt="Audio Production" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+                                        <span class="text-xs font-semibold text-white"><i class="fa-solid fa-sliders text-studioOrange mr-1"></i> Audio Mixing</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Live Status Widget -->
+                            <div class="bg-studioDark/80 rounded-xl p-3 border border-studioBorder flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+                                    <span class="text-xs text-gray-300 font-medium">Studio Booking Open for Next Week</span>
+                                </div>
+                                <a href="#contact" class="text-xs text-studioOrange font-bold hover:underline">Reserve <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE SERVICES SECTION -->
+    <section id="services" class="py-24 bg-studioDark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-xs font-extrabold uppercase tracking-widest text-studioOrange">What We Do</h2>
+                <p class="text-3xl sm:text-5xl font-black text-white">Full Spectrum Creative Services</p>
+                <p class="text-gray-400 text-base">Select a category to explore our professional creative capabilities.</p>
+            </div>
+
+            <!-- Service Category Tabs -->
+            <div class="flex justify-center mt-10 gap-2 sm:gap-4 flex-wrap" id="serviceTabs">
+                <button onclick="filterServices('all')" class="service-tab active border border-studioOrange bg-studioOrange text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all">
+                    All Services
+                </button>
+                <button onclick="filterServices('design')" class="service-tab border border-studioBorder bg-studioCard text-gray-300 hover:border-studioOrange px-5 py-2.5 rounded-full text-sm font-semibold transition-all">
+                    Design & Branding
+                </button>
+                <button onclick="filterServices('photo')" class="service-tab border border-studioBorder bg-studioCard text-gray-300 hover:border-studioOrange px-5 py-2.5 rounded-full text-sm font-semibold transition-all">
+                    Photo & Video
+                </button>
+                <button onclick="filterServices('audio')" class="service-tab border border-studioBorder bg-studioCard text-gray-300 hover:border-studioOrange px-5 py-2.5 rounded-full text-sm font-semibold transition-all">
+                    Audio & Music
+                </button>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12" id="servicesGrid">
+                
+                <!-- Service Card 1 -->
+                <div class="service-card design bg-studioCard border border-studioBorder rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 glow-effect flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange text-xl mb-6">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Graphic & Flyer Design</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            High-converting event flyers, social media artwork, posters, and promotional graphics customized for maximum visual impact.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Event & Church Flyers</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Social Media Content Kits</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Motion Graphics / Animated Posters</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Graphic & Flyer Design', 'Our graphic design team crafts standout artwork customized for your events, releases, and campaigns. Includes print-ready formats and high-res digital files.')" class="w-full text-center py-2.5 rounded-xl border border-studioBorder hover:border-studioOrange hover:text-studioOrange text-sm font-semibold transition-colors">
+                        View Details
+                    </button>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card design bg-studioCard border border-studioBorder rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 glow-effect flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange text-xl mb-6">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Brand Identity & ID Cards</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Complete corporate identity design including logos, brand guidelines, stationery, and specialized corporate ID card graphics.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Logo Design & Vectors</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Custom Staff ID Cards & Lanyards</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Brand Guidelines & Typography</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Brand Identity & ID Cards', 'Elevate your brand image with custom-crafted visual guidelines, vector logos, and professional organization ID card assets.')" class="w-full text-center py-2.5 rounded-xl border border-studioBorder hover:border-studioOrange hover:text-studioOrange text-sm font-semibold transition-colors">
+                        View Details
+                    </button>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card photo bg-studioCard border border-studioBorder rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 glow-effect flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange text-xl mb-6">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Studio & Outdoor Photography</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Professional portrait sessions, executive headshots, fashion lookbooks, and high-quality product photography.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> In-Studio Lighting Setup</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Skin Retouching & Color Grading</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Product & E-commerce Photography</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Studio & Outdoor Photography', 'Book tailored photography sessions with top-tier gear, expert color retouching, and full high-resolution digital delivery.')" class="w-full text-center py-2.5 rounded-xl border border-studioBorder hover:border-studioOrange hover:text-studioOrange text-sm font-semibold transition-colors">
+                        View Details
+                    </button>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="service-card photo bg-studioCard border border-studioBorder rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 glow-effect flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange text-xl mb-6">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Cinematic Videography</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            End-to-end video production for music videos, event highlights, corporate promos, and social media reels.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> 4K Camera & Drone Coverage</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Video Editing & Motion Graphics</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Music Video Production</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Cinematic Videography', 'Capture moments with cinematic quality. We cover everything from storyboarding and multi-cam shooting to sound design and color grading.')" class="w-full text-center py-2.5 rounded-xl border border-studioBorder hover:border-studioOrange hover:text-studioOrange text-sm font-semibold transition-colors">
+                        View Details
+                    </button>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="service-card audio bg-studioCard border border-studioBorder rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 glow-effect flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange text-xl mb-6">
+                            <i class="fa-solid fa-microphone-lines"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Vocal Recording & Beats</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Acoustically treated vocal booth recording sessions, custom instrumental production, and jingles.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> High-End Vocal Microphones</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Custom Beat Production</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Voiceover Recording</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Vocal Recording & Beats', 'Record vocals in an acoustically optimized studio setup. We also produce custom beats and audio jingles tailored to your style.')" class="w-full text-center py-2.5 rounded-xl border border-studioBorder hover:border-studioOrange hover:text-studioOrange text-sm font-semibold transition-colors">
+                        View Details
+                    </button>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="service-card audio bg-studioCard border border-studioBorder rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 glow-effect flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange text-xl mb-6">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Audio Mixing & Mastering</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            Transform raw tracks into industry-standard release quality audio ready for Spotify, Apple Music, and broadcast.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Multi-Track Stem Mixing</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Streaming Loudness Mastering</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-studioOrange"></i> Vocal Tuning & Alignment</li>
+                        </ul>
+                    </div>
+                    <button onclick="openServiceModal('Audio Mixing & Mastering', 'Give your songs polished clarity, punchy low-end, and commercial loudness using top digital plugins and hybrid studio gear.')" class="w-full text-center py-2.5 rounded-xl border border-studioBorder hover:border-studioOrange hover:text-studioOrange text-sm font-semibold transition-colors">
+                        View Details
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SHOWCASE -->
+    <section id="portfolio" class="py-24 bg-studioDark/50 border-t border-b border-studioBorder/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-xs font-extrabold uppercase tracking-widest text-studioOrange">Featured Work</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-white mt-2">Portfolio Showcase</p>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex gap-2 flex-wrap" id="portfolioFilters">
+                    <button onclick="filterPortfolio('all')" class="port-btn active text-xs font-bold px-4 py-2 rounded-lg bg-studioOrange text-white border border-studioOrange transition-all">All</button>
+                    <button onclick="filterPortfolio('design')" class="port-btn text-xs font-bold px-4 py-2 rounded-lg bg-studioCard text-gray-400 border border-studioBorder hover:border-gray-500 transition-all">Graphics</button>
+                    <button onclick="filterPortfolio('photo')" class="port-btn text-xs font-bold px-4 py-2 rounded-lg bg-studioCard text-gray-400 border border-studioBorder hover:border-gray-500 transition-all">Photography</button>
+                    <button onclick="filterPortfolio('video')" class="port-btn text-xs font-bold px-4 py-2 rounded-lg bg-studioCard text-gray-400 border border-studioBorder hover:border-gray-500 transition-all">Videography</button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolioGrid">
+                
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item design group relative rounded-2xl overflow-hidden bg-studioCard border border-studioBorder h-80">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80" alt="Brand Poster Design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <span class="text-xs text-studioOrange font-bold uppercase tracking-wider">Graphic Design</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Neon Music Concert Artwork</h3>
+                        <p class="text-xs text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">High-impact event promotional poster designed for digital & print release.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item photo group relative rounded-2xl overflow-hidden bg-studioCard border border-studioBorder h-80">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Studio Portrait Shoot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <span class="text-xs text-studioOrange font-bold uppercase tracking-wider">Studio Photography</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Fashion Executive Portrait</h3>
+                        <p class="text-xs text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Studio lighting setup, editorial framing, and premium retouching.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item video group relative rounded-2xl overflow-hidden bg-studioCard border border-studioBorder h-80">
+                    <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="Cinematic Video Production" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <span class="text-xs text-studioOrange font-bold uppercase tracking-wider">Videography</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Commercial Product Promo</h3>
+                        <p class="text-xs text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Dynamic slow-motion cinematic video shoot & color grading.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item design group relative rounded-2xl overflow-hidden bg-studioCard border border-studioBorder h-80">
+                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=800&q=80" alt="Brand Identity" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <span class="text-xs text-studioOrange font-bold uppercase tracking-wider">Branding & ID</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Corporate ID & Brand Kit</h3>
+                        <p class="text-xs text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Custom organizational branding, typography, and staff ID cards.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item photo group relative rounded-2xl overflow-hidden bg-studioCard border border-studioBorder h-80">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Live Event Photo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <span class="text-xs text-studioOrange font-bold uppercase tracking-wider">Event Photography</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Live Concert Coverage</h3>
+                        <p class="text-xs text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">High-energy stage lighting photo capture and color tuning.</p>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item video group relative rounded-2xl overflow-hidden bg-studioCard border border-studioBorder h-80">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" alt="Music Video Shoot" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                        <span class="text-xs text-studioOrange font-bold uppercase tracking-wider">Video & Audio</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Artist Music Video Session</h3>
+                        <p class="text-xs text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Full music video shoot, sound track mixing & color suite finishing.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE PRICING & CUSTOM QUOTE CALCULATOR -->
+    <section id="calculator" class="py-24 bg-studioDark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <h2 class="text-xs font-extrabold uppercase tracking-widest text-studioOrange">Transparent Estimates</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-white">Interactive Quote Calculator</p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Customize your package to get an instant estimate for your project. Select the services, quantities, or studio session durations you require.
+                    </p>
+                    
+                    <div class="p-6 bg-studioCard rounded-2xl border border-studioBorder space-y-4">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-info text-studioOrange text-xl"></i>
+                            <h4 class="font-bold text-white text-sm">Need a Custom Project Package?</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Every creative project is unique. For bulk pricing, long-term retainers, or specific multi-day shoots, send us a custom inquiry directly.
+                        </p>
+                        <a href="#contact" class="inline-block text-xs font-bold text-studioOrange hover:underline">Talk to Our Producer <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <!-- Interactive Calculator Card -->
+                <div class="lg:col-span-7 bg-studioCard border border-studioBorder rounded-3xl p-6 sm:p-8 shadow-2xl">
+                    <form id="quoteCalculator" class="space-y-6">
+                        
+                        <!-- Graphic Design Option -->
+                        <div>
+                            <label class="flex justify-between items-center text-sm font-semibold text-gray-200 mb-2">
+                                <span><i class="fa-solid fa-layer-group text-studioOrange mr-2"></i> Graphic / Flyer Design ($50 / design)</span>
+                                <span id="flyerCountVal" class="text-studioOrange font-bold">0 Designs</span>
+                            </label>
+                            <input type="range" id="flyerQty" min="0" max="10" value="0" class="w-full h-2 bg-studioBorder rounded-lg appearance-none cursor-pointer accent-studioOrange" oninput="updateCalculator()">
+                        </div>
+
+                        <!-- Brand Kit Package Option -->
+                        <div class="pt-4 border-t border-studioBorder/60">
+                            <label class="flex items-center justify-between cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" id="brandKitOption" class="w-5 h-5 rounded border-studioBorder text-studioOrange focus:ring-studioOrange bg-studioDark cursor-pointer" onchange="updateCalculator()">
+                                    <div>
+                                        <div class="text-sm font-semibold text-white">Full Brand Identity & Logo Kit</div>
+                                        <div class="text-xs text-gray-400">Vector logo, color palette, typography & ID design template</div>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-studioOrange">+$250</span>
+                            </label>
+                        </div>
+
+                        <!-- Photo Session Hours -->
+                        <div class="pt-4 border-t border-studioBorder/60">
+                            <label class="flex justify-between items-center text-sm font-semibold text-gray-200 mb-2">
+                                <span><i class="fa-solid fa-camera text-studioOrange mr-2"></i> Photography / Studio Session ($100 / hr)</span>
+                                <span id="photoHoursVal" class="text-studioOrange font-bold">0 Hours</span>
+                            </label>
+                            <input type="range" id="photoHours" min="0" max="8" value="0" class="w-full h-2 bg-studioBorder rounded-lg appearance-none cursor-pointer accent-studioOrange" oninput="updateCalculator()">
+                        </div>
+
+                        <!-- Audio Recording & Mixing -->
+                        <div class="pt-4 border-t border-studioBorder/60">
+                            <label class="flex justify-between items-center text-sm font-semibold text-gray-200 mb-2">
+                                <span><i class="fa-solid fa-microphone text-studioOrange mr-2"></i> Audio Recording & Vocal Session ($60 / hr)</span>
+                                <span id="audioHoursVal" class="text-studioOrange font-bold">0 Hours</span>
+                            </label>
+                            <input type="range" id="audioHours" min="0" max="10" value="0" class="w-full h-2 bg-studioBorder rounded-lg appearance-none cursor-pointer accent-studioOrange" oninput="updateCalculator()">
+                        </div>
+
+                        <!-- Video Production Add-on -->
+                        <div class="pt-4 border-t border-studioBorder/60">
+                            <label class="flex items-center justify-between cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" id="videoShootOption" class="w-5 h-5 rounded border-studioBorder text-studioOrange focus:ring-studioOrange bg-studioDark cursor-pointer" onchange="updateCalculator()">
+                                    <div>
+                                        <div class="text-sm font-semibold text-white">4K Cinematic Video Shoot & Edit</div>
+                                        <div class="text-xs text-gray-400">Half-day camera coverage + full video post-production editing</div>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-studioOrange">+$400</span>
+                            </label>
+                        </div>
+
+                        <!-- Total Output Banner -->
+                        <div class="mt-8 bg-studioDark p-6 rounded-2xl border border-studioBorder flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div>
+                                <span class="text-xs uppercase text-gray-400 font-medium">Estimated Project Total</span>
+                                <div class="text-3xl sm:text-4xl font-black text-white">$<span id="totalEstimate">0</span></div>
+                                <span class="text-[10px] text-gray-400">*Final quote subject to exact requirements</span>
+                            </div>
+                            <button type="button" onclick="transferEstimateToBooking()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-studioOrange hover:bg-studioOrangeHover text-white font-bold text-sm transition-all shadow-lg shadow-studioOrange/20">
+                                Apply to Booking Form <i class="fa-solid fa-arrow-down ml-2 text-xs"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-studioDark/60 border-t border-studioBorder/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="relative">
+                    <div class="relative rounded-3xl overflow-hidden border border-studioBorder shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1000&q=80" alt="GDStudio Production Setup" class="w-full h-[450px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-studioDark via-transparent to-transparent"></div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-studioCard border border-studioBorder p-6 rounded-2xl hidden sm:block shadow-xl max-w-xs">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-studioOrange/20 text-studioOrange flex items-center justify-center text-xl font-bold">
+                                GD
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm">God's Daughter Studio</h4>
+                                <p class="text-xs text-gray-400">Built on Faith & Creative Power</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h2 class="text-xs font-extrabold uppercase tracking-widest text-studioOrange">About GDStudio</h2>
+                    <h3 class="text-3xl sm:text-5xl font-black text-white leading-tight">Driven by Passion, Defined by Detail</h3>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        At GDStudio (God's Daughter Studio), we believe that exceptional visual and sound storytelling empowers individuals, artists, and organizations to stand out. From vibrant graphic design prints to high-end audio mastering and video productions, our team brings unmatched dedication to every project.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 bg-studioCard rounded-xl border border-studioBorder">
+                            <i class="fa-solid fa-bullseye text-studioOrange text-xl mb-2"></i>
+                            <h4 class="text-white font-bold text-sm">Precision Quality</h4>
+                            <p class="text-xs text-gray-400 mt-1">High-end equipment and crisp output standards.</p>
+                        </div>
+                        <div class="p-4 bg-studioCard rounded-xl border border-studioBorder">
+                            <i class="fa-solid fa-clock text-studioOrange text-xl mb-2"></i>
+                            <h4 class="text-white font-bold text-sm">Fast Turnaround</h4>
+                            <p class="text-xs text-gray-400 mt-1">Streamlined studio workflows and quick delivery.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DIRECT CONTACT & BOOKING FORM -->
+    <section id="contact" class="py-24 bg-studioDark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs font-extrabold uppercase tracking-widest text-studioOrange">Start Your Project</h2>
+                <p class="text-3xl sm:text-5xl font-black text-white">Book a Studio Session / Request Quote</p>
+                <p class="text-gray-400 text-sm">Fill out the inquiry form below and our production manager will respond promptly.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Contact info panel -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="bg-studioCard border border-studioBorder rounded-3xl p-8 space-y-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Contact Info</h3>
+                            <p class="text-xs text-gray-400 mt-1">Get in touch directly or visit our studio.</p>
+                        </div>
+
+                        <div class="space-y-6 text-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-400 uppercase font-semibold">Studio Location</div>
+                                    <div class="text-white font-medium mt-0.5">124 Creative Hub Ave, Media District</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-400 uppercase font-semibold">Email Us</div>
+                                    <div class="text-white font-medium mt-0.5">contact@gdstudio.com</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-studioOrange/10 border border-studioOrange/30 flex items-center justify-center text-studioOrange shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-400 uppercase font-semibold">Call / WhatsApp</div>
+                                    <div class="text-white font-medium mt-0.5">+1 (555) 019-2834</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-studioBorder">
+                            <span class="text-xs text-gray-400 block mb-3 font-semibold uppercase">Follow GDStudio</span>
+                            <div class="flex gap-3">
+                                <a href="#" class="w-9 h-9 rounded-lg bg-studioDark border border-studioBorder flex items-center justify-center text-gray-300 hover:text-studioOrange hover:border-studioOrange transition-all"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#" class="w-9 h-9 rounded-lg bg-studioDark border border-studioBorder flex items-center justify-center text-gray-300 hover:text-studioOrange hover:border-studioOrange transition-all"><i class="fa-brands fa-youtube"></i></a>
+                                <a href="#" class="w-9 h-9 rounded-lg bg-studioDark border border-studioBorder flex items-center justify-center text-gray-300 hover:text-studioOrange hover:border-studioOrange transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" class="w-9 h-9 rounded-lg bg-studioDark border border-studioBorder flex items-center justify-center text-gray-300 hover:text-studioOrange hover:border-studioOrange transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="lg:col-span-8">
+                    <form id="bookingForm" onsubmit="handleFormSubmit(event)" class="bg-studioCard border border-studioBorder rounded-3xl p-6 sm:p-10 space-y-6">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Your Name *</label>
+                                <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-studioDark border border-studioBorder text-white focus:outline-none focus:border-studioOrange text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Email Address *</label>
+                                <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-studioDark border border-studioBorder text-white focus:outline-none focus:border-studioOrange text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Phone Number</label>
+                                <input type="tel" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-xl bg-studioDark border border-studioBorder text-white focus:outline-none focus:border-studioOrange text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Service Category *</label>
+                                <select id="bookingServiceSelect" class="w-full px-4 py-3 rounded-xl bg-studioDark border border-studioBorder text-white focus:outline-none focus:border-studioOrange text-sm">
+                                    <option value="graphic-design">Graphic Design & Flyer</option>
+                                    <option value="branding">Brand Identity & ID Cards</option>
+                                    <option value="photography">Studio / Outdoor Photography</option>
+                                    <option value="videography">Cinematic Videography</option>
+                                    <option value="audio-recording">Audio Recording Session</option>
+                                    <option value="audio-mixing">Audio Mixing & Mastering</option>
+                                    <option value="custom">Custom Package Offer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Preferred Date</label>
+                                <input type="date" class="w-full px-4 py-3 rounded-xl bg-studioDark border border-studioBorder text-white focus:outline-none focus:border-studioOrange text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Estimated Budget ($)</label>
+                                <input type="text" id="bookingBudgetInput" placeholder="Calculated or custom budget" class="w-full px-4 py-3 rounded-xl bg-studioDark border border-studioBorder text-white focus:outline-none focus:border-studioOrange text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 uppercase mb-2">Project Details / Special Requests *</label>
+                            <textarea rows="4" required placeholder="Tell us more about your creative vision, references, or timing..." class="w-full px-4 py-3 rounded-xl bg-studioDark border border-studioBorder text-white focus:outline-none focus:border-studioOrange text-sm"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-studioOrange hover:bg-studioOrangeHover text-white font-bold text-base transition-all shadow-lg shadow-studioOrange/25 hover:shadow-studioOrange/40">
+                            Submit Session Request <i class="fa-solid fa-paper-plane ml-2 text-sm"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-studioBorder/60 py-12 text-xs text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-studioOrange flex items-center justify-center text-white font-black text-sm">
+                        GD
+                    </div>
+                    <span class="font-bold text-white text-base">GDStudio</span>
+                    <span class="text-gray-500">| God's Daughter Studio</span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 text-gray-400 font-medium">
+                    <a href="#home" class="hover:text-studioOrange transition-colors">Home</a>
+                    <a href="#services" class="hover:text-studioOrange transition-colors">Services</a>
+                    <a href="#portfolio" class="hover:text-studioOrange transition-colors">Portfolio</a>
+                    <a href="#calculator" class="hover:text-studioOrange transition-colors">Quote Estimator</a>
+                    <a href="#contact" class="hover:text-studioOrange transition-colors">Contact</a>
+                </div>
+
+                <div>
+                    &copy; <span id="currentYear"></span> GDStudio. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SERVICE DETAIL MODAL -->
+    <div id="serviceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-studioCard border border-studioBorder rounded-3xl max-w-lg w-full p-6 sm:p-8 relative space-y-6">
+            <button onclick="closeServiceModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="w-12 h-12 rounded-xl bg-studioOrange/20 border border-studioOrange/40 flex items-center justify-center text-studioOrange text-xl">
+                <i class="fa-solid fa-sparkles"></i>
+            </div>
+            <h3 id="modalTitle" class="text-2xl font-bold text-white">Service Title</h3>
+            <p id="modalDesc" class="text-gray-300 text-sm leading-relaxed">Service Description...</p>
+            <div class="pt-4 flex justify-end gap-3">
+                <button onclick="closeServiceModal()" class="px-5 py-2.5 rounded-xl border border-studioBorder text-gray-300 text-sm font-semibold hover:border-gray-400">Close</button>
+                <a href="#contact" onclick="closeServiceModal()" class="px-5 py-2.5 rounded-xl bg-studioOrange text-white text-sm font-semibold hover:bg-studioOrangeHover">Book This Service</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION BOX -->
+    <div id="notificationBox" class="fixed bottom-6 right-6 z-50 bg-studioOrange text-white px-6 py-4 rounded-2xl shadow-2xl font-semibold text-sm hidden transform transition-all duration-300 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-lg"></i>
+        <span id="notificationText">Action completed successfully!</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Dynamic Year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close Mobile Menu on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Service Tab Filtering
+        function filterServices(category) {
+            const tabs = document.querySelectorAll('.service-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-studioOrange', 'text-white', 'border-studioOrange');
+                tab.classList.add('bg-studioCard', 'text-gray-300', 'border-studioBorder');
+            });
+
+            event.target.classList.remove('bg-studioCard', 'text-gray-300', 'border-studioBorder');
+            event.target.classList.add('bg-studioOrange', 'text-white', 'border-studioOrange');
+
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Service Modal Handlers
+        function openServiceModal(title, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDesc').textContent = description;
+            document.getElementById('serviceModal').classList.remove('hidden');
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.add('hidden');
+        }
+
+        // Portfolio Filtering
+        function filterPortfolio(category) {
+            const btns = document.querySelectorAll('.port-btn');
+            btns.forEach(btn => {
+                btn.classList.remove('bg-studioOrange', 'text-white', 'border-studioOrange');
+                btn.classList.add('bg-studioCard', 'text-gray-400', 'border-studioBorder');
+            });
+
+            event.target.classList.remove('bg-studioCard', 'text-gray-400', 'border-studioBorder');
+            event.target.classList.add('bg-studioOrange', 'text-white', 'border-studioOrange');
+
+            const items = document.querySelectorAll('.portfolio-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Interactive Quote Calculator Logic
+        function updateCalculator() {
+            const flyerQty = parseInt(document.getElementById('flyerQty').value);
+            const photoHours = parseInt(document.getElementById('photoHours').value);
+            const audioHours = parseInt(document.getElementById('audioHours').value);
+            const brandKit = document.getElementById('brandKitOption').checked;
+            const videoShoot = document.getElementById('videoShootOption').checked;
+
+            document.getElementById('flyerCountVal').textContent = flyerQty + (flyerQty === 1 ? ' Design' : ' Designs');
+            document.getElementById('photoHoursVal').textContent = photoHours + (photoHours === 1 ? ' Hour' : ' Hours');
+            document.getElementById('audioHoursVal').textContent = audioHours + (audioHours === 1 ? ' Hour' : ' Hours');
+
+            let total = (flyerQty * 50) + (photoHours * 100) + (audioHours * 60);
+            if (brandKit) total += 250;
+            if (videoShoot) total += 400;
+
+            document.getElementById('totalEstimate').textContent = total;
+        }
+
+        function transferEstimateToBooking() {
+            const total = document.getElementById('totalEstimate').textContent;
+            document.getElementById('bookingBudgetInput').value = '$' + total + ' Estimated';
+            showNotification('Estimate of $' + total + ' attached to your booking form!');
+            
+            // Smooth scroll to contact section
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Custom Notification Popup
+        function showNotification(msg) {
+            const box = document.getElementById('notificationBox');
+            document.getElementById('notificationText').textContent = msg;
+            box.classList.remove('hidden');
+            setTimeout(() => {
+                box.classList.add('hidden');
+            }, 3500);
+        }
+
+        // Booking Form Submission Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showNotification('Thank you! Your booking request has been submitted to GDStudio.');
+            e.target.reset();
+            document.getElementById('bookingBudgetInput').value = '';
+        }
+    </script>
+</body>
+</html>
